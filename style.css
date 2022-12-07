@@ -185,3 +185,10 @@ footer {
     position: fixed;
   }
 }
+
+.bottom-center {
+  background-color: #055391;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
