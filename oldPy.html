@@ -1,0 +1,361 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ 
+<style type="text/css">
+    body {
+        font-family: 'Arial';
+        font-size: 12px;
+    }
+ 
+    table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+ 
+    tr {
+        border: 1px solid black;
+    }
+    
+    tr td {
+        border: 1px solid black;
+    }
+    
+    tr.table-head td {
+        border: 2px solid black;
+        padding: 5px;
+       
+        text-align: center;
+    }
+    
+    tr.table-footer td {
+        border: 2px solid black;
+        padding: 5px;
+        text-align: center;
+        border-top: 2px solid black;
+        font-weight: bold;
+    }
+    tr.table-footer td:first-child {
+        text-align: right;
+        padding-right: 10px;
+        font-weight: bold;
+    }
+    tr.table-body {
+        border: 1px dotted black;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        
+    }
+ 
+    tr.table-body:last-child {
+        border-bottom: 1px solid black;
+    }
+    tr.table-body td {
+        padding: 5px;
+        border: 1px dotted black;
+ 
+        padding-right: 0;
+    }
+ 
+    td {
+        padding: 5px;
+        vertical-align: top;
+        
+    }
+    .main-header {
+        padding-bottom: 20px;
+    }
+    .main-header .title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 14px;
+        padding-bottom: 10px;
+    }
+ 
+    .main-header .head-left,
+    .main-header .head-right {
+        display: inline-block;
+        border: 1px solid black;
+        width: 49.5%;
+    }
+ 
+    .main-header-content {
+        line-height: 1.5;
+        width: 100%;
+        padding: 10px 0;
+        font-size: 16px;
+    }
+ 
+    .main-header-left,
+    .main-header-right {
+        display: inline-block;
+        width: 49%;
+    }
+ 
+    .main-header-left {
+        float: left;
+    }
+ 
+    .main-header-right {
+        text-align: right;
+        float: right;
+    }
+ 
+    .header-line{
+        clear: both;
+        width: 100%;
+        border-bottom: 5px solid #c2c2c2;
+        padding-top: 20px;
+        
+    }
+ 
+    .main-subheader {
+        padding-top:20px;
+        padding-bottom: 40px;
+        
+    }
+ 
+    .subheader-left,
+    .subheader-right {
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        border: 1px solid black;
+        border-radius: 20px;
+        padding: 20px;
+        width: 40%;
+ 
+    }
+ 
+    .subheader-field.title div{
+        font-weight: bold;
+        
+    }
+    .subheader-right {
+        float: right;
+    }
+ 
+    .subheader-field {
+        display: inline-block;
+        width: 45%;
+        font-size: 16px;
+        line-height: 1.5;
+        vertical-align: top;
+    }
+ 
+    .subheader-field-name {
+        position: absolute;
+        font-size: 25px;
+        font-weight: bold;
+        opacity: 0.15;
+        letter-spacing: 15px;
+        bottom: 5px;
+        right: 0;
+    }
+ 
+    .bt-n {
+        border-top: none !important;
+    }
+ 
+    .bottom-right-field {
+        border-top: 2px solid black;
+        width: 30%;
+        float: right;
+        padding-top:10px;
+        margin-top: 100px;
+        text-align:center;
+        display: inline-block;
+    }
+ 
+ 
+    .bottom-right-signature {
+        width: 30%;
+        float: right;
+        padding-top:10px;
+        text-align:center;
+        display: inline-block;
+    }
+    .bottom-left-field {
+        display: inline-block;
+        width: 50%;
+        margin-top: 90px;
+    }
+ 
+    .bottom-left-field div {
+        display: inline-block;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+ 
+</style>
+ 
+  </head>
+  <body style="position: relative;">
+      
+    <div class="main-header">
+        <div class="main-header-logo"></div>
+        <div class="main-header-content">
+            <div style="font-weight: bold; padding-bottom: 5px; font-size: 20px;"><u>{{company.name}}</u></div>
+            <div class="main-header-left">
+                <div>{{company.address}}, {{company.city}}</div>
+                <div>ID: {{company.uin}}</div>
+                {% if company.iban %}
+                <b>IBAN: </b>{{company.iban}}<br>
+                {%endif%}{% if company.tin %}
+                <div>PDV: {{company.tin}}</div>
+                {%endif%}
+                {% if company.bank %}
+                <b>{{company.bank}}: </b>{{company.bank_account}} <br>
+                {%endif%}
+                {% if company.bank_2 %}
+                <b>{{company.bank_2}}: </b>{{company.bank_account_2}} <br>
+                {%endif%}
+                {% if company.bank_3 %}
+                <b>{{company.bank_3}}: </b>{{company.bank_account_3}} <br>
+                {%endif%}
+                {% if company.iban %}
+                <b>IBAN: </b>{{company.iban}}<br>
+                {%endif%}
+                {% if company.swift%}
+                <b>SWIFT: </b>{{company.swift}} <br>
+                {%endif%}
+                <div>TEL: {{company.contact}}</div>
+                {% if company.fax%}
+                <div>FAX: </b>{{company.fax}} </div>
+                {%endif%}
+                <div>{{company.email|default_if_none:''}}</div>
+                <div>{{company.reg_number|default_if_none:''}}</div>
+                <div>{{company.website|default_if_none:''}}</div>
+            </div>
+            <div class="main-header-right">
+            <img src="https://chart.googleapis.com/chart?cht=qr&chl={{record.qr_link|urlencode}}&chs=160x160&chld=L|0"
+        class="img-thumbnail img-responsive" style="max-width: 200px; margin: 10px;"/>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="header-line">
+ 
+    </div>
+ 
+    <div class="main-subheader">
+        <div class="subheader-left">
+            <div class="subheader-field title">
+                <div>Broj fakture:</div>
+                {% if record.fiscal_number %}
+                <div>Fiskalni račun:</div>
+                {%endif%}
+                <div>Datum:</div>
+                <div>Rok za placanje:</div>
+                <div>Mjesto izdavanja:</div>
+                <div>Način Plaćanja:</div>
+ 
+            </div>
+            <div class="subheader-field">
+                <div>MP-{{record.index}}</div>
+                {% if record.fiscal_number %}
+                <div>{{record.fiscal_number}}</div>
+                {%endif%}
+                <div>{{record.date}}</div>
+                <div>{{record.deadline}}</div>
+                <div>{{company.city}}</div>
+                <div>{% if record.cash %}Gotovina{% endif %}
+                {% if record.virman %}Virman{% endif %}
+                {% if record.card %}Kartica{% endif %}
+                {% if record.check %} Ček {% endif %}
+                </div>
+ 
+            </div>
+            <div class="subheader-field-name">INFO</div>
+        </div>
+        <div class="subheader-right" style="padding-bottom: 44px;">
+            <div class="subheader-field title" style="width: 30%;">
+                <div>Partner:</div>
+                {% if record.partner_name|length|get_digit:"-1" >= 30 %}
+                {% endif %}
+                <div>Adresa:</div>
+                <div>Grad:</div>
+                <div>ID/PDV:</div>
+            </div>
+            <div class="subheader-field" style="width: 60%;">
+                <div>{{record.partner_name}}</div>
+                <div>{{record.partner_address}}</div>
+                <div>{{record.partner_city}}</div>
+                <div>{{record.partner_uin|default_if_none:''}}/{{record.partner_tin|default_if_none:''}}</div>
+            </div>
+            <div class="subheader-field-name">KUPAC</div>
+        </div>
+    </div>
+    <br>
+    <table>
+        <thead>
+            <tr class="table-head">
+                <td width="3%">#</td>
+                <td>Sifra</td>
+                <td width="27%">Artikal</td>
+                <td width="5%">Jed. mjer.</td>
+                <td>Barkod</td>
+                <td>Kolicina</td>
+                <td>Cijena bez PDV-a</td>
+                <td width="6%">Popust</td>
+                <td>Iznos bez PDV</td>
+                <td>Iznos PDV</td>
+                <td>Ukupno sa PDV</td>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for ind in records %}
+            <tr class="table-body">
+                <td width="3%">{{forloop.counter}}</td>
+                <td>{{ind.article_code}}</td>
+                <td width="27%">
+                    <div>{{ind.article_name}}</div>
+                    <div><i>{{ind.desc|default_if_none:''}}</i></div>
+                </td>
+                <td width="5%">{{ind.article_unit_id}}</td>
+                <td style="word-wrap: break-word; white-space: normal;">{{ind.article.barcode}}</td>
+                <td>{{ind.quantity}}</td>
+                <td>{{ind.price_without_vat}}</td>
+                <td width="6%">{{ind.discount}}</td>
+                <td>{{ind.total_without_vat}}</td>
+                <td>{{ind.vat_total}}</td>
+                <td>{{ind.total}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+  </table>
+    <table style="float:right">
+        <tbody style="float:right">
+            <tr width="30%" class="table-footer">
+                <td colspan="10">OSNOVICA</td>
+                <td style="text-align: left;" >{{total_without_vat}} KM</td>
+            </tr>
+            <tr class="table-footer">
+                <td colspan="10">PDV</td>
+                <td width="15%" style="text-align: left;">{{vat_total}}</td>
+            </tr>
+            <tr class="table-footer">
+                <td colspan="10">Ukupno</td>
+                <td style="text-align: left;width:70%;">{{total}} KM</td>
+            </tr>
+        </tbody>
+  </table>
+ 
+  <div class="bottom-right-field" style="float:left;">
+    Izdao, M.P. </div>
+  <div class="bottom-right-field" style="float:right;">
+    Primio, M.P. </div>
+ 
+  <div class="bottom-left-field">
+ 
+      {% if record.footer %}<br>
+      <b>NAPOMENA: </b>{{record. }} <br>
+      {%endif%}00
+  </div>
+ 
+  </body>
+</html>

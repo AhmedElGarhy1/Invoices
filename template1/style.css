@@ -7,13 +7,14 @@
 
 body {
   background: #0e0e0e;
+  min-height: 100vh; /* testing */
 }
 
 .wrapper {
   margin: auto;
   width: 800px !important;
-  height: 100vh; /* testing */
-  background-color: white;
+  height: 100%;
+  background-color: white !important;
   -webkit-print-color-adjust: exact;
   position: relative;
 }
@@ -79,7 +80,7 @@ header .header-right .content::after {
   content: "";
   position: absolute;
   top: 0;
-  left: 1px;
+  left: 2px;
   transform: translate(-100%);
   width: 159px;
   height: 200px;
@@ -134,6 +135,9 @@ header .header-right .content .rows div {
   background-color: #055391 !important;
   color: white;
 }
+.table-section .big-table .table-body {
+  background-color: white;
+}
 .table-section .big-table .table-body:nth-child(odd) {
   background-color: #eaeaea;
 }
@@ -141,6 +145,8 @@ header .header-right .content .rows div {
   border: 1px solid rgba(17, 17, 17, 0.103);
   padding: 5px;
 }
+
+/* .small-table-div {} */
 
 .table-section .big-table.small-table {
   margin: 15px 15px;
@@ -151,6 +157,19 @@ header .header-right .content .rows div {
 
 .table-section big-table thead {
   font-size: 15px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+}
+.bottom-right-field {
+  border-top: 2px solid black;
+  width: 30%;
+  padding-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  display: inline-block;
 }
 
 #signature {
