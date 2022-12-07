@@ -10,155 +10,7 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500&display=swap"
       rel="stylesheet" />
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-        font-family: "Roboto", sans-serif;
-        box-sizing: border-box;
-      }
-
-      body {
-        background: #0e0e0e;
-        min-height: 100vh; /* testing */
-      }
-
-      .wrapper {
-        margin: auto;
-        width: 800px !important;
-        height: 100%;
-        background-color: white !important;
-        -webkit-print-color-adjust: exact;
-        position: relative;
-      }
-
-      /* header left */
-
-      header .header-left {
-        background-color: black;
-        display: flex;
-        -webkit-print-color-adjust: exact;
-        align-items: center;
-        padding: 40px 40px;
-        width: 375px;
-        position: relative;
-        height: 126px !important;
-      }
-
-      header .header-left::after {
-        content: "";
-        position: absolute;
-        right: 0.5px;
-        top: 0;
-        transform: translate(100%);
-        width: 100px;
-        height: 126px;
-        background-color: black;
-        clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
-        z-index: 10;
-      }
-      header .header-left .logo {
-        width: 60px;
-        margin-right: 10px;
-        z-index: 10;
-      }
-      header .header-left h2 {
-        color: white;
-        font-size: 35px;
-        z-index: 10;
-      }
-
-      /* header right */
-
-      header .header-right {
-        position: absolute;
-        top: 0;
-        right: 0;
-      }
-      header .header-right .content {
-        background-color: #055391;
-        -webkit-print-color-adjust: exact;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        height: 200px;
-        width: 310px;
-        position: relative;
-        z-index: 10;
-        text-align: start;
-      }
-      header .header-right .content::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 2px;
-        transform: translate(-100%);
-        width: 159px;
-        height: 200px;
-        background-color: #055391;
-        clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
-        z-index: 10;
-      }
-
-      header .header-right .content h2 {
-        font-size: 40px;
-      }
-
-      header .header-right .content .rows {
-        width: 80%;
-      }
-      header .header-right .content .rows div {
-        display: flex;
-        justify-content: space-between;
-        font-size: 12px;
-        margin-top: 5px;
-      }
-      /* end header */
-
-      .info-section {
-        margin: 5px;
-        display: flex;
-        align-items: center;
-        gap: 30px;
-      }
-      .info-section .info-content {
-        width: 500px;
-      }
-      .info-section .info-content div {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 5px;
-        border-bottom: 1px solid #ccc;
-      }
-      /* info section finished */
-
-      .table-section {
-        margin-top: 30px;
-      }
-
-      .table-section .big-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 11px;
-      }
-      .table-section .big-table thead,
-      .total {
-        background-color: #055391 !important;
-        color: white;
-      }
-      .table-section .big-table .table-body {
-        background-color: white;
-      }
-      .table-section .big-table .table-body:nth-child(odd) {
-        background-color: #eaeaea;
-      }
-      .table-section .big-table td {
-        border: 1px solid rgba(17, 17, 17, 0.103);
-        padding: 5px;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
     <title>Invoice Template #1</title>
   </head>
   <body>
@@ -210,6 +62,11 @@
           style="max-width: 200px; margin: 5px 0px 0px 90px" />
       </div>
       <!-- header finished -->
+      <div
+        class="company-name"
+        style="text-align: center; font-size: 25px; font-weight: bold">
+        {{company.name}}
+      </div>
       <section class="info-section">
         <div class="info-content">
           <div>{{company.address}}, {{company.city}}</div>
@@ -333,6 +190,11 @@
         <div class="bottom-right-field">Primio, M.P.</div>
         <div id="signature">Signature</div>
       </footer>
+      <div class="bottom-center">
+        {% if record.footer %}
+        <b>NAPOMENA: </b> <br />
+        {{record. }} {%endif%}
+      </div>
     </main>
   </body>
 </html>

@@ -125,6 +125,12 @@ header .header-right .content .rows div {
 }
 /* info section finished */
 
+/* .scan-code {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+} */
+
 .table-section {
   margin-top: 30px;
 }
