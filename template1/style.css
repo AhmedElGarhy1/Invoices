@@ -149,11 +149,8 @@ header .header-right .content .rows div {
   border: 1px solid rgba(17, 17, 17, 0.103);
   padding: 5px;
 }
-.table-section .big-table.small-table {
-  margin: 15px 15px;
-}
-.table-section .big-table.small-table td {
-  border-bottom: 1px solid #999;
+.table-section .big-table.small {
+  page-break-before: always;
 }
 
 .table-section big-table thead {
