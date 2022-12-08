@@ -14,8 +14,16 @@
 
     <style>
       :root {
-        --primary-color: #055391;
-        --secondary-color: black;
+        --primary-color: {
+           {
+            primary_color|default: "YOURVALUE";
+          }
+        }
+        --secondary-color: {
+           {
+            secondary_color|default: "YOURVALUE";
+          }
+        }
       }
       * {
         padding: 0;
