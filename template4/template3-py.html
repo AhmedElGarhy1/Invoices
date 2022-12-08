@@ -1,0 +1,487 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500&display=swap"
+      rel="stylesheet" />
+    <style>
+      :root {
+        --primary-color: {
+           {
+            primary_color|default: "rgba(56, 29, 29, 0.97)";
+          }
+        }
+        --secondary-color: {
+           {
+            primary_color|default: "rgba(255, 0, 0, 0.568)";
+          }
+        }
+      }
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #0e0e0e;
+        min-height: 100vh; /* testing */
+      }
+
+      .wrapper {
+        overflow-x: hidden;
+        margin: auto;
+        width: 800px !important;
+        min-height: 100vh; /* testing */
+        background-color: white !important;
+        -webkit-print-color-adjust: exact;
+        position: relative;
+      }
+
+      /* header left */
+
+      header {
+        /* background-color: var(--primary-color); */
+        height: 185px;
+        position: relative;
+      }
+
+      header .header-left {
+        background-color: transparent;
+        display: flex;
+        -webkit-print-color-adjust: exact;
+        align-items: center;
+        padding: 53px 0px;
+        width: 375px;
+        position: relative;
+        top: 55px;
+        left: 10px;
+      }
+      header .header-left > * {
+        z-index: 1000 !important;
+      }
+      header .header-left::before {
+        content: "";
+        position: absolute;
+        left: -300px;
+        top: -100px;
+        width: 350px;
+        height: 350px;
+        transform: rotate(45deg);
+        background-color: var(--primary-color);
+        z-index: 100;
+      }
+      header .header-left::after {
+        content: "";
+        position: absolute;
+        left: 110px;
+        top: 3px;
+        transform: rotate(45deg);
+        width: 145px;
+        height: 145px;
+        background-color: var(--secondary-color);
+        z-index: 100;
+      }
+
+      /* header .header-left .shape {
+  width: 350px;
+  height: 35px;
+  background-color: var(--primary-color);
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  border-top: 5px solid white;
+  box-sizing: content-box;
+}
+
+header .header-left .shape::after {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 0;
+  transform: translate(100%);
+  width: 25px;
+  height: 35px;
+  background-color: var(--primary-color);
+  clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+  z-index: 100;
+}
+header .header-left .shape::before {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: -5px;
+  transform: translate(100%);
+  width: 33px;
+  height: 40px;
+  background-color: white;
+  clip-path: polygon(0% 0%, 5px 0, 100% 100%, 0% 100%);
+  z-index: 100;
+} */
+
+      header .header-left .logo {
+        width: 60px;
+        margin-right: 10px;
+        z-index: 10;
+      }
+      header .header-left h2 {
+        color: white;
+        font-size: 35px;
+        z-index: 10;
+      }
+
+      /* header right */
+
+      header .header-right {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
+      header .header-right .content {
+        background-color: transparent;
+        -webkit-print-color-adjust: exact;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        width: 310px;
+        position: relative;
+        z-index: 10;
+        text-align: start;
+        padding: 50px 10px 20px;
+      }
+
+      header .header-right .content h2 {
+        font-size: 30px;
+      }
+
+      header .header-right .content .rows {
+        width: 80%;
+      }
+      header .header-right .content .rows div {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        margin-top: 5px;
+      }
+
+      /* end header */
+
+      .scan-code {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 160px;
+        position: relative;
+      }
+
+      .company-name {
+        text-align: center;
+        font-size: 25px;
+        font-weight: bold;
+        width: fit-content;
+        margin: 10px auto;
+        background: var(--primary-color);
+        color: white;
+        padding: 6px 12px;
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .info-section {
+        margin: 5px;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+      .info-section .info-content {
+        width: 500px;
+      }
+      .info-section .info-content div {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        border-bottom: 1px solid #ccc;
+      }
+      /* info section finished */
+
+      .table-section {
+        margin-top: 30px;
+      }
+
+      .table-section .big-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11px;
+      }
+      .table-section .big-table thead,
+      .total {
+        background-color: var(--primary-color) !important;
+        color: white;
+      }
+      .table-section .big-table .table-body {
+        background-color: white;
+      }
+      .table-section .big-table .table-body:nth-child(odd) {
+        background-color: #eaeaea;
+      }
+      .table-section .big-table td {
+        border: 1px solid rgba(17, 17, 17, 0.103);
+        padding: 5px;
+      }
+      .table-section .big-table.small {
+        page-break-before: always;
+      }
+
+      .table-section big-table thead {
+        font-size: 15px;
+      }
+
+      footer {
+        bottom: 0;
+        left: 0;
+        position: relative;
+        width: 100%;
+      }
+      .footer {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        width: 800px;
+      }
+      .bottom-right-field {
+        border-top: 2px solid black;
+        width: 30%;
+        padding-top: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+        display: inline-block;
+      }
+
+      .bottom-center {
+        padding: 10px;
+        max-width: 325px;
+        text-align: center;
+      }
+
+      #signature {
+        position: absolute;
+        top: -10px;
+        left: 0;
+        transform: translateY(-100%);
+        writing-mode: vertical-lr;
+        transform: rotate(-180deg) translateY(100%);
+      }
+
+      @media print {
+        big-table.sticky {
+          display: table-header-group;
+        }
+
+        footer {
+          position: fixed;
+          z-index: -1000;
+        }
+      }
+    </style>
+
+    <title>Invoice Template #3</title>
+  </head>
+  <body>
+    <main class="wrapper">
+      <header>
+        <div class="header-left">
+          <img class="logo" src="logo.png" alt="" />
+          <h2>COMPANY</h2>
+          <div class="shape"></div>
+        </div>
+        <div class="header-right">
+          <div class="content">
+            <h2>INVOICE</h2>
+            <div class="shape"></div>
+
+            <div class="rows">
+              <div>
+                <span>Broj fakture:</span>
+                <span>MP-{{record.index}}</span>
+              </div>
+              <div>
+                {% if record.fiscal_number %}
+                <span>Fiskalni račun:</span>
+                <span>{{record.fiscal_number}}</span>
+                {%endif%}
+              </div>
+              <div>
+                <span>Datum:</span>
+                <span>{{record.date}}</span>
+              </div>
+              <div>
+                <span>Rok za placanje:</span>
+                <span>{{record.deadline}}</span>
+              </div>
+              <div>
+                <span>Mjesto izdavanja:</span>
+                <span>{{company.city}}</span>
+              </div>
+              <div>
+                <span>Način Plaćanja:</span>
+                <span>{% if record.cash %}Gotovina{% endif %}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="scan-code">
+        <div class="company-name">{{company.name}}</div>
+        {% if qr_code_on_invoices %}
+        <img
+          src="https://chart.googleapis.com/chart?cht=qr&chl={{record.qr_link|urlencode}}&chs=160x160&chld=L|0"
+          class="img-thumbnail img-responsive"
+          style="max-width: 200px; margin-left: auto" />
+        {{endif}}
+      </div>
+      <!-- header finished -->
+      <section class="info-section">
+        <div class="info-content">
+          <div>{{company.address}}, {{company.city}}</div>
+          <div><b>ID: </b>{{company.uin}}</div>
+
+          {% if company.iban %}
+          <div><b>IBAN: </b>{{company.iban}}</div>
+          {%endif%}
+          <!--  -->
+          {% if company.tin %}
+          <div>PDV: {{company.tin}}</div>
+          {%endif%}
+          <!--  -->
+          {% if company.bank %}
+          <div><b>{{company.bank}}: </b>{{company.bank_account}}</div>
+          {%endif%}
+          <!--  -->
+          {% if company.bank_2 %}
+          <div><b>{{company.bank_2}}: </b>{{company.bank_account_2}}</div>
+          {%endif%}
+
+          <!--  -->
+          {% if company.bank_3 %}
+          <div><b>{{company.bank_3}}: </b>{{company.bank_account_3}}</div>
+          {%endif%}
+          <!--  -->
+          {% if company.iban %}
+          <div><b>IBAN: </b>{{company.iban}}</div>
+          {%endif%}
+          <!--  -->
+          {% if company.swift%}
+          <div><b>SWIFT: </b>{{company.swift}}</div>
+          {%endif%}
+          <!--  -->
+          <div><b>TEL: </b>{{company.contact}}</div>
+
+          {% if company.fax%}
+          <div><b>FAX: </b>{{company.fax}}</div>
+          {%endif%}
+
+          <div>{{company.email|default_if_none:''}}</div>
+
+          <div>{{company.reg_number|default_if_none:''}}</div>
+
+          <div>{{company.website|default_if_none:''}}</div>
+        </div>
+
+        <div class="info-content" style="width: 280px">
+          <div><b>Partner:</b> {{record.partner_name}}</div>
+
+          <div><b>Adresa:</b> {{record.partner_address}}</div>
+          <div><b>Grad:</b> {{record.partner_city}}</div>
+          <div>
+            <b>ID/PDV:</b>
+            {{record.partner_uin|default_if_none:''}}/{{record.partner_tin|default_if_none:''}}
+          </div>
+        </div>
+      </section>
+      <!-- Info section finished -->
+      <section class="table-section">
+        <table class="big-table">
+          <thead>
+            <tr class="table-head">
+              <td width="3%">No</td>
+              <td>Sifra</td>
+              <td width="160px">Artikal</td>
+              <td width="8%">Jed. mjer.</td>
+              <td>Barkod</td>
+              <td>Kolicina</td>
+              <td>Cijena bez PDV-a</td>
+              <td width="6%">Popust</td>
+              <td>Iznos bez PDV</td>
+              <td>Iznos PDV</td>
+              <td>Ukupno sa PDV</td>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for ind in records %}
+            <tr class="table-body">
+              <td>{{forloop.counter}}</td>
+              <td>{{ind.article_code}}</td>
+              <td>
+                {{ind.article_name}}<br />
+                <i>{{ind.desc|default_if_none:''}}</i>
+              </td>
+              <td>{{ind.article_unit_id}}</td>
+              <td style="word-wrap: break-word; white-space: normal">
+                {{ind.article.barcode}}
+              </td>
+              <td>{{ind.quantity}}</td>
+              <td>{{ind.price_without_vat}}</td>
+              <td>{{ind.discount}}</td>
+              <td>{{ind.total_without_vat}}</td>
+              <td>{{ind.vat_total}}</td>
+              <td>{{ind.total}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+
+        <table class="big-table small">
+          <tbody style="float: right; margin: 10px">
+            <tr class="table-body" width="30%" class="table-footer">
+              <td colspan="10">OSNOVICA</td>
+              <td style="text-align: left">{{total_without_vat}} KM</td>
+            </tr>
+            <tr class="table-body" class="table-footer">
+              <td colspan="10">PDV</td>
+              <td width="15%" style="text-align: left">{{vat_total}}</td>
+            </tr>
+            <tr class="table-body total" class="table-footer">
+              <td colspan="10">Ukupno</td>
+              <td style="text-align: left; width: 70%">{{total}} KM</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <footer>
+        <div class="footer">
+          <div class="bottom-right-field">Izdao, M.P.</div>
+          <div class="bottom-center">
+            {% if record.footer %}
+            <b>NAPOMENA: </b> <br />
+            {{record.footer }} {%endif%}
+          </div>
+          <div class="bottom-right-field">Primio, M.P.</div>
+          <div id="signature">Signature</div>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>
