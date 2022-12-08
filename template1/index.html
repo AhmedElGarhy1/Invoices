@@ -13,8 +13,8 @@
 
     <style>
       :root {
-        --left-head-bgcolor: black;
-        --right-head-bgcolor: #055391;
+        --primary-color: #055391;
+        --secondary-color: black;
       }
       * {
         padding: 0;
@@ -40,7 +40,7 @@
       /* header left */
 
       header .header-left {
-        background-color: var(--left-head-bgcolor);
+        background-color: var(--secondary-color);
         display: flex;
         -webkit-print-color-adjust: exact;
         align-items: center;
@@ -58,7 +58,7 @@
         transform: translate(100%);
         width: 100px;
         height: 126px;
-        background-color: var(--left-head-bgcolor);
+        background-color: var(--secondary-color);
         clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
         z-index: 10;
       }
@@ -81,7 +81,7 @@
         right: 0;
       }
       header .header-right .content {
-        background-color: var(--right-head-bgcolor);
+        background-color: var(--primary-color);
         -webkit-print-color-adjust: exact;
         display: flex;
         flex-direction: column;
@@ -102,7 +102,7 @@
         transform: translate(-100%);
         width: 159px;
         height: 200px;
-        background-color: var(--right-head-bgcolor);
+        background-color: var(--primary-color);
         clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
         z-index: 10;
       }
@@ -150,7 +150,7 @@
       }
       .table-section .big-table thead,
       .total {
-        background-color: var(--right-head-bgcolor) !important;
+        background-color: var(--primary-color) !important;
         color: white;
       }
       .table-section .big-table .table-body {
@@ -205,7 +205,7 @@
         font-weight: bold;
         width: fit-content;
         margin: auto;
-        background: var(--right-head-bgcolor);
+        background: var(--primary-color);
         color: white;
         border-radius: 11px;
         padding: 6px 12px;
@@ -274,6 +274,7 @@
           src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A//faktura.obrt.ba/%3Fuuid%3Df7363f5d-30d2-4d07-a047-197cf9efb50e%26cuid%3Def22cab7-ea73-4284-af8b-64b70d30200e%26type%3Dretail&chs=160x160&chld=L|0"
           class="img-thumbnail img-responsive"
           style="max-width: 200px; margin-left: 90px" />
+        <!-- <div style="margin-top: 85px"></div> -->
       </div>
       <div
         class="company-name"

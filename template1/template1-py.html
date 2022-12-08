@@ -14,8 +14,8 @@
 
     <style>
       :root {
-        --left-head-bgcolor: black;
-        --right-head-bgcolor: #055391;
+        --primary-color: #055391;
+        --secondary-color: black;
       }
       * {
         padding: 0;
@@ -41,7 +41,7 @@
       /* header left */
 
       header .header-left {
-        background-color: var(--left-head-bgcolor);
+        background-color: var(--secondary-color);
         display: flex;
         -webkit-print-color-adjust: exact;
         align-items: center;
@@ -59,7 +59,7 @@
         transform: translate(100%);
         width: 100px;
         height: 126px;
-        background-color: var(--left-head-bgcolor);
+        background-color: var(--secondary-color);
         clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
         z-index: 10;
       }
@@ -82,7 +82,7 @@
         right: 0;
       }
       header .header-right .content {
-        background-color: var(--right-head-bgcolor);
+        background-color: var(--primary-color);
         -webkit-print-color-adjust: exact;
         display: flex;
         flex-direction: column;
@@ -103,7 +103,7 @@
         transform: translate(-100%);
         width: 159px;
         height: 200px;
-        background-color: var(--right-head-bgcolor);
+        background-color: var(--primary-color);
         clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
         z-index: 10;
       }
@@ -151,7 +151,7 @@
       }
       .table-section .big-table thead,
       .total {
-        background-color: var(--right-head-bgcolor) !important;
+        background-color: var(--primary-color) !important;
         color: white;
       }
       .table-section .big-table .table-body {
@@ -206,7 +206,7 @@
         font-weight: bold;
         width: fit-content;
         margin: auto;
-        background: var(--right-head-bgcolor);
+        background: var(--primary-color);
         color: white;
         border-radius: 11px;
         padding: 6px 12px;
@@ -278,10 +278,14 @@
         </div>
       </header>
       <div class="scan-code">
+        {% if qr_code_on_invoices %}
         <img
           src="https://chart.googleapis.com/chart?cht=qr&chl={{record.qr_link|urlencode}}&chs=160x160&chld=L|0"
           class="img-thumbnail img-responsive"
           style="max-width: 200px; margin: 5px 0px 0px 90px" />
+        {% else %}
+        <div style="margin-top: 85px"></div>
+        {{endif}}
       </div>
       <!-- header finished -->
       <div

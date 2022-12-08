@@ -1,6 +1,6 @@
 :root {
-  --left-head-bgcolor: black;
-  --right-head-bgcolor: #055391;
+  --primary-color: #055391;
+  --secondary-color: black;
 }
 * {
   padding: 0;
@@ -26,7 +26,7 @@ body {
 /* header left */
 
 header .header-left {
-  background-color: var(--left-head-bgcolor);
+  background-color: var(--secondary-color);
   display: flex;
   -webkit-print-color-adjust: exact;
   align-items: center;
@@ -44,7 +44,7 @@ header .header-left::after {
   transform: translate(100%);
   width: 100px;
   height: 126px;
-  background-color: var(--left-head-bgcolor);
+  background-color: var(--secondary-color);
   clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
   z-index: 10;
 }
@@ -67,7 +67,7 @@ header .header-right {
   right: 0;
 }
 header .header-right .content {
-  background-color: var(--right-head-bgcolor);
+  background-color: var(--primary-color);
   -webkit-print-color-adjust: exact;
   display: flex;
   flex-direction: column;
@@ -88,7 +88,7 @@ header .header-right .content::after {
   transform: translate(-100%);
   width: 159px;
   height: 200px;
-  background-color: var(--right-head-bgcolor);
+  background-color: var(--primary-color);
   clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
   z-index: 10;
 }
@@ -136,7 +136,7 @@ header .header-right .content .rows div {
 }
 .table-section .big-table thead,
 .total {
-  background-color: var(--right-head-bgcolor) !important;
+  background-color: var(--primary-color) !important;
   color: white;
 }
 .table-section .big-table .table-body {
@@ -191,7 +191,7 @@ footer {
   font-weight: bold;
   width: fit-content;
   margin: auto;
-  background: var(--right-head-bgcolor);
+  background: var(--primary-color);
   color: white;
   border-radius: 11px;
   padding: 6px 12px;
