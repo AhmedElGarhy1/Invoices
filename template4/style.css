@@ -12,14 +12,12 @@
 
 body {
   background: #0e0e0e;
-  min-height: 100vh; /* testing */
 }
 
 .wrapper {
   overflow-x: hidden;
   margin: auto;
   width: 800px !important;
-  min-height: 100vh; /* testing */
   background-color: white !important;
   -webkit-print-color-adjust: exact;
   position: relative;

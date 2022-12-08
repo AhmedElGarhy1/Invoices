@@ -181,21 +181,11 @@
               <td>8.50</td>
               <td>58.50</td>
             </tr>
-            <tr class="table-body">
-              <td>1</td>
-              <td>2</td>
-              <td>MESO</td>
-              <td>kg</td>
-              <td style="word-wrap: break-word; white-space: normal"></td>
-              <td>3.250</td>
-              <td>20.0000</td>
-              <td width="6%">23.08000</td>
-              <td>50.000</td>
-              <td>8.50</td>
-              <td>58.50</td>
+            
             </tr>
           </tbody>
         </table>
+
         <table class="big-table small">
           <tbody style="float: right; margin: 10px">
             <tr class="table-body" width="30%" class="table-footer">
@@ -227,4 +217,22 @@
       </footer>
     </main>
   </body>
+  <script>
+    const pageHeight = document.querySelector(".wrapper").clientHeight;
+
+    const paperHeight = 1123;
+    const footerHeight = 120;
+    window.addEventListener("beforeprint", (e) => {
+      const smallTable = document.querySelector(
+        ".table-section .big-table.small"
+      );
+      if (pageHeight % paperHeight > footerHeight) {
+        smallTable.style.pageBreakBefore = "avoid";
+        smallTable.style.cssText = `
+          page-break-before: avoid;
+          z-index: 20000 !important;
+        `;
+      }
+    });
+  </script>
 </html>

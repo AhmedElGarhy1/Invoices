@@ -224,5 +224,23 @@
         </div>
       </footer>
     </main>
+    <script>
+      const pageHeight = document.querySelector(".wrapper").clientHeight;
+
+      const paperHeight = 1123;
+      const footerHeight = 120;
+      window.addEventListener("beforeprint", (e) => {
+        const smallTable = document.querySelector(
+          ".table-section .big-table.small"
+        );
+        if (pageHeight % paperHeight > footerHeight) {
+          smallTable.style.pageBreakBefore = "avoid";
+          smallTable.style.cssText = `
+          page-break-before: avoid;
+          z-index: 20000 !important;
+        `;
+        }
+      });
+    </script>
   </body>
 </html>
