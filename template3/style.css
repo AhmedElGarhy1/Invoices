@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #222933;
-  --secondary-color: #055391;
+  --primary-color: rgba(56, 29, 29, 0.97);
+  --secondary-color: rgba(255, 0, 0, 0.568);
 }
 * {
   padding: 0;
@@ -28,7 +28,7 @@ body {
 
 header {
   /* background-color: var(--primary-color); */
-  height: 235px;
+  height: 185px;
   position: relative;
 }
 
@@ -37,7 +37,7 @@ header .header-left {
   display: flex;
   -webkit-print-color-adjust: exact;
   align-items: center;
-  padding: 102px 0px;
+  padding: 53px 0px;
   width: 375px;
   position: relative;
   top: 55px;
@@ -49,30 +49,30 @@ header .header-left > * {
 header .header-left::before {
   content: "";
   position: absolute;
-  left: -250px;
-  top: -50px;
+  left: -300px;
+  top: -100px;
   width: 350px;
   height: 350px;
   transform: rotate(45deg);
-  background-color: rgba(56, 29, 29, 0.97);
+  background-color: var(--primary-color);
   z-index: 100;
 }
 header .header-left::after {
   content: "";
   position: absolute;
   left: 110px;
-  top: 25px;
+  top: 3px;
   transform: rotate(45deg);
-  width: 200px;
-  height: 200px;
-  background-color: rgba(255, 0, 0, 0.568);
+  width: 145px;
+  height: 145px;
+  background-color: var(--secondary-color);
   z-index: 100;
 }
 
 /* header .header-left .shape {
   width: 350px;
   height: 35px;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   position: absolute;
   bottom: -12px;
   left: 0;
@@ -88,7 +88,7 @@ header .header-left .shape::after {
   transform: translate(100%);
   width: 25px;
   height: 35px;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
   z-index: 100;
 }
@@ -135,7 +135,7 @@ header .header-right .content {
   position: relative;
   z-index: 10;
   text-align: start;
-  padding: 70px 10px 20px;
+  padding: 50px 10px 20px;
 }
 
 header .header-right .content h2 {
@@ -168,7 +168,7 @@ header .header-right .content .rows div {
   font-weight: bold;
   width: fit-content;
   margin: 10px auto;
-  background: var(--secondary-color);
+  background: var(--primary-color);
   color: white;
   padding: 6px 12px;
   position: absolute;
@@ -205,7 +205,7 @@ header .header-right .content .rows div {
 }
 .table-section .big-table thead,
 .total {
-  background-color: var(--secondary-color) !important;
+  background-color: var(--primary-color) !important;
   color: white;
 }
 .table-section .big-table .table-body {
