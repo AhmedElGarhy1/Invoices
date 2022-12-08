@@ -267,9 +267,6 @@ footer {
   big-table.sticky {
     display: table-header-group;
   }
-  .wrapper {
-    z-index: -1001;
-  }
 
   footer {
     position: fixed;
