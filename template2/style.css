@@ -167,6 +167,18 @@ header .header-right .shape::before {
 .scan-code {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+
+.company-name {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  width: fit-content;
+  background: var(--secondary-color);
+  color: white;
+  padding: 6px 12px;
 }
 
 .info-section {
@@ -244,18 +256,6 @@ footer {
   padding: 10px;
   max-width: 325px;
   text-align: center;
-}
-
-.company-name {
-  text-align: center;
-  font-size: 25px;
-  font-weight: bold;
-  width: fit-content;
-  margin: auto;
-  background: var(--secondary-color);
-  color: white;
-  border-radius: 11px;
-  padding: 6px 12px;
 }
 
 #signature {
