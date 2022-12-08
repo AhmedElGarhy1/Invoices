@@ -14,12 +14,12 @@
       :root {
         --primary-color: {
            {
-            primary_color|default: "YOURVALUE";
+            primary_color|default: "rgba(56, 29, 29, 0.97)";
           }
         }
         --secondary-color: {
            {
-            secondary_color|default: "YOURVALUE";
+            primary_color|default: "rgba(255, 0, 0, 0.568)";
           }
         }
       }
@@ -36,6 +36,7 @@
       }
 
       .wrapper {
+        overflow-x: hidden;
         margin: auto;
         width: 800px !important;
         min-height: 100vh; /* testing */
@@ -47,8 +48,8 @@
       /* header left */
 
       header {
-        background-color: var(--primary-color);
-        height: 235px;
+        /* background-color: var(--primary-color); */
+        height: 185px;
         position: relative;
       }
 
@@ -57,45 +58,73 @@
         display: flex;
         -webkit-print-color-adjust: exact;
         align-items: center;
-        padding: 80px 40px 40px;
+        padding: 53px 0px;
         width: 375px;
+        position: relative;
+        top: 55px;
+        left: 10px;
       }
-
-      header .header-left .shape {
+      header .header-left > * {
+        z-index: 1000 !important;
+      }
+      header .header-left::before {
+        content: "";
+        position: absolute;
+        left: -300px;
+        top: -100px;
         width: 350px;
-        height: 35px;
-        background-color: var(--secondary-color);
+        height: 350px;
+        transform: rotate(45deg);
+        background-color: var(--primary-color);
+        z-index: 100;
+      }
+      header .header-left::after {
+        content: "";
         position: absolute;
-        bottom: -12px;
-        left: 0;
-        border-top: 5px solid white;
-        box-sizing: content-box;
+        left: 110px;
+        top: 3px;
+        transform: rotate(45deg);
+        width: 145px;
+        height: 145px;
+        background-color: var(--secondary-color);
+        z-index: 100;
       }
 
-      header .header-left .shape::after {
-        content: "";
-        position: absolute;
-        right: 0px;
-        top: 0;
-        transform: translate(100%);
-        width: 25px;
-        height: 35px;
-        background-color: var(--secondary-color);
-        clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
-        z-index: 100;
-      }
-      header .header-left .shape::before {
-        content: "";
-        position: absolute;
-        right: 0px;
-        top: -5px;
-        transform: translate(100%);
-        width: 33px;
-        height: 40px;
-        background-color: white;
-        clip-path: polygon(0% 0%, 5px 0, 100% 100%, 0% 100%);
-        z-index: 100;
-      }
+      /* header .header-left .shape {
+  width: 350px;
+  height: 35px;
+  background-color: var(--primary-color);
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  border-top: 5px solid white;
+  box-sizing: content-box;
+}
+
+header .header-left .shape::after {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 0;
+  transform: translate(100%);
+  width: 25px;
+  height: 35px;
+  background-color: var(--primary-color);
+  clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+  z-index: 100;
+}
+header .header-left .shape::before {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: -5px;
+  transform: translate(100%);
+  width: 33px;
+  height: 40px;
+  background-color: white;
+  clip-path: polygon(0% 0%, 5px 0, 100% 100%, 0% 100%);
+  z-index: 100;
+} */
 
       header .header-left .logo {
         width: 60px;
@@ -123,13 +152,11 @@
         flex-direction: column;
         justify-content: end;
         align-items: center;
-        color: white;
-        height: 200px;
         width: 310px;
         position: relative;
         z-index: 10;
         text-align: start;
-        padding-bottom: 10px;
+        padding: 50px 10px 20px;
       }
 
       header .header-right .content h2 {
@@ -146,50 +173,14 @@
         margin-top: 5px;
       }
 
-      header .header-right .shape {
-        width: 350px;
-        height: 35px;
-        background-color: var(--secondary-color);
-        position: absolute;
-        top: 0px;
-        right: 0;
-        border-bottom: 5px solid white;
-        box-sizing: content-box;
-        z-index: 10000;
-      }
-
-      header .header-right .shape::after {
-        content: "";
-        position: absolute;
-        left: -48px;
-        top: 0;
-        transform: translate(100%);
-        width: 25px;
-        height: 35px;
-        background-color: var(--secondary-color);
-        clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
-        z-index: 100;
-      }
-      header .header-right .shape::before {
-        content: "";
-        position: absolute;
-        left: -69px;
-        bottom: -5px;
-        transform: translate(100%);
-        width: 35px;
-        height: 40px;
-        background-color: white;
-        clip-path: polygon(calc(100% - 10px) 0, 100% 0%, 100% 100%, 0% 100%);
-        z-index: 100;
-      }
-
       /* end header */
 
       .scan-code {
         display: flex;
         justify-content: space-between;
-        align-items: flex-end;
-        padding-bottom: 10px;
+        align-items: center;
+        height: 160px;
+        position: relative;
       }
 
       .company-name {
@@ -197,9 +188,14 @@
         font-size: 25px;
         font-weight: bold;
         width: fit-content;
-        background: var(--secondary-color);
+        margin: 10px auto;
+        background: var(--primary-color);
         color: white;
         padding: 6px 12px;
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translateX(-50%);
       }
 
       .info-section {
@@ -230,7 +226,7 @@
       }
       .table-section .big-table thead,
       .total {
-        background-color: var(--secondary-color) !important;
+        background-color: var(--primary-color) !important;
         color: white;
       }
       .table-section .big-table .table-body {
@@ -300,7 +296,7 @@
       }
     </style>
 
-    <title>Invoice Template #1</title>
+    <title>Invoice Template #3</title>
   </head>
   <body>
     <main class="wrapper">
@@ -347,21 +343,12 @@
         </div>
       </header>
       <div class="scan-code">
-        <div
-          class="company-name"
-          style="
-            text-align: center;
-            font-size: 25px;
-            font-weight: bold;
-            margin-top: 20px;
-          ">
-          {{company.name}}
-        </div>
+        <div class="company-name">{{company.name}}</div>
         {% if qr_code_on_invoices %}
         <img
           src="https://chart.googleapis.com/chart?cht=qr&chl={{record.qr_link|urlencode}}&chs=160x160&chld=L|0"
           class="img-thumbnail img-responsive"
-          style="max-width: 200px; margin: 5px 0px 0px 90px" />
+          style="max-width: 200px; margin-left: auto" />
         {{endif}}
       </div>
       <!-- header finished -->
