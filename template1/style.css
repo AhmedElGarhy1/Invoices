@@ -18,11 +18,12 @@ body {
   margin: auto;
   width: 800px !important;
   min-height: 100vh; /* testing */
-  background-color: white !important;
-  -webkit-print-color-adjust: exact;
   position: relative;
 }
-
+.wrapper-section {
+  background-color: white !important;
+  -webkit-print-color-adjust: exact;
+}
 /* header left */
 
 header .header-left {
@@ -213,6 +214,6 @@ footer {
 
   footer {
     position: fixed;
-    z-index: -1000;
+    z-index: -5;
   }
 }

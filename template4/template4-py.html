@@ -37,13 +37,14 @@
       }
 
       .wrapper {
-        overflow-x: hidden;
         margin: auto;
         width: 800px !important;
         min-height: 100vh; /* testing */
+        position: relative;
+      }
+      .wrapper-section {
         background-color: white !important;
         -webkit-print-color-adjust: exact;
-        position: relative;
       }
 
       /* header left */
@@ -260,7 +261,7 @@
 
         footer {
           position: fixed;
-          z-index: -1000;
+          z-index: -5;
         }
       }
     </style>
@@ -268,6 +269,7 @@
     <title>Invoice Template #4</title>
   </head>
   <body>
+    {% for invoice in records %}
     <main class="wrapper">
       <header>
         <div class="header-left">
@@ -473,22 +475,28 @@
         </div>
       </footer>
     </main>
+    {% endfor %}
     <script>
-      const pageHeight = document.querySelector(".wrapper").clientHeight;
+      const wrappers = [...document.querySelectorAll(".wrapper")];
 
-      const paperHeight = 1123;
-      const footerHeight = 120;
-      window.addEventListener("beforeprint", (e) => {
-        const smallTable = document.querySelector(
-          ".table-section .big-table.small"
-        );
-        if (pageHeight % paperHeight > footerHeight) {
-          smallTable.style.pageBreakBefore = "avoid";
-          smallTable.style.cssText = `
+      const paperHeight = 1167;
+      const footerHeight = 115;
+      const smallTable = document.querySelectorAll(
+        ".table-section .big-table.small"
+      );
+      // handle footer issue
+
+      wrappers.forEach((wrapper, i) => {
+        const pagesNo = Math.ceil(wrapper.clientHeight / paperHeight);
+        const height = pagesNo * paperHeight;
+
+        if (wrapper.clientHeight % paperHeight > footerHeight) {
+          smallTable[i].style.cssText = `
           page-break-before: avoid;
           z-index: 20000 !important;
         `;
         }
+        wrapper.style.height = `${height}px`;
       });
     </script>
   </body>

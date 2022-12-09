@@ -299,208 +299,217 @@ header .header-left .shape::before {
     <title>Invoice Template #3</title>
   </head>
   <body>
+    {% for invoice in records %}
     <main class="wrapper">
-      <header>
-        <div class="header-left">
-          {% if company.has_logo %}
-          <img class="logo" src="{{company.has_logo}}" alt="" />
-          {% else %}
-          <h2>{{company.name}}</h2>
-          {% endif %}
-          <div class="shape"></div>
-        </div>
-        <div class="header-right">
-          <div class="content">
-            <h2>
-              {% if etype == "faktura" %} Faktura {% endif %} {% if etype ==
-              "avans" %} Avansna faktura {% endif %} {% if etype == "ko" %} K.O.
-              {% endif %}
-            </h2>
+      <section class="wrapper-section">
+        <header>
+          <div class="header-left">
+            {% if company.has_logo %}
+            <img class="logo" src="{{company.has_logo}}" alt="" />
+            {% else %}
+            <h2>{{company.name}}</h2>
+            {% endif %}
             <div class="shape"></div>
+          </div>
+          <div class="header-right">
+            <div class="content">
+              <h2>
+                {% if etype == "faktura" %} Faktura {% endif %} {% if etype ==
+                "avans" %} Avansna faktura {% endif %} {% if etype == "ko" %}
+                K.O. {% endif %}
+              </h2>
+              <div class="shape"></div>
 
-            <div class="rows">
-              <div>
-                <span>Broj fakture:</span>
-                <span
-                  >{% if etype == "faktura" %} Br. Fakture {% endif %} {% if
-                  etype == "avans" %} Avansna faktura {% endif %} {% if etype ==
-                  "ko" %} Knjižno odobrenje {% endif %}:</span
-                >
-                <span>MP-{{invoice.index}}</span>
-              </div>
-              <div>
-                {% if invoice.fiscal_number %}
-                <span>Fiskalni račun:</span>
-                <span>{{invoice.fiscal_number}}</span>
-                {%endif%}
-              </div>
-              <div>
-                <span>Datum:</span>
-                <span>{{invoice.date}}</span>
-              </div>
-              <div>
-                <span>Rok za placanje:</span>
-                <span>{{invoice.deadline}}</span>
-              </div>
-              <div>
-                <span>Mjesto izdavanja:</span>
-                <span>{{company.city}}</span>
-              </div>
-              <div>
-                <span>Način Plaćanja:</span>
-                <span
-                  >{% if invoice.cash %}Gotovina{% endif %} {% if invoice.virman
-                  %}Virman{% endif %} {% if invoice.card %}Kartica{% endif %} {%
-                  if invoice.check %} Ček {% endif %}</span
-                >
+              <div class="rows">
+                <div>
+                  <span>Broj fakture:</span>
+                  <span
+                    >{% if etype == "faktura" %} Br. Fakture {% endif %} {% if
+                    etype == "avans" %} Avansna faktura {% endif %} {% if etype
+                    == "ko" %} Knjižno odobrenje {% endif %}:</span
+                  >
+                  <span>MP-{{invoice.index}}</span>
+                </div>
+                <div>
+                  {% if invoice.fiscal_number %}
+                  <span>Fiskalni račun:</span>
+                  <span>{{invoice.fiscal_number}}</span>
+                  {%endif%}
+                </div>
+                <div>
+                  <span>Datum:</span>
+                  <span>{{invoice.date}}</span>
+                </div>
+                <div>
+                  <span>Rok za placanje:</span>
+                  <span>{{invoice.deadline}}</span>
+                </div>
+                <div>
+                  <span>Mjesto izdavanja:</span>
+                  <span>{{company.city}}</span>
+                </div>
+                <div>
+                  <span>Način Plaćanja:</span>
+                  <span
+                    >{% if invoice.cash %}Gotovina{% endif %} {% if
+                    invoice.virman %}Virman{% endif %} {% if invoice.card
+                    %}Kartica{% endif %} {% if invoice.check %} Ček {% endif
+                    %}</span
+                  >
+                </div>
               </div>
             </div>
           </div>
+        </header>
+        <div class="scan-code">
+          <div class="company-name">{{company.name}}</div>
+          {% if company.qr_code_on_invoices %}
+          <img
+            src="https://chart.googleapis.com/chart?cht=qr&chl={{invoice.qr_link|urlencode}}&chs=160x160&chld=L|0"
+            class="img-thumbnail img-responsive"
+            style="max-width: 200px; margin-left: auto" />
+          {{endif}}
         </div>
-      </header>
-      <div class="scan-code">
-        <div class="company-name">{{company.name}}</div>
-        {% if company.qr_code_on_invoices %}
-        <img
-          src="https://chart.googleapis.com/chart?cht=qr&chl={{invoice.qr_link|urlencode}}&chs=160x160&chld=L|0"
-          class="img-thumbnail img-responsive"
-          style="max-width: 200px; margin-left: auto" />
-        {{endif}}
-      </div>
-      <!-- header finished -->
-      <section class="info-section">
-        <div class="info-content">
-          <div>
-            <b>Adresa: </b>{{company.address}}, {{company.city}},
-            {{company.postal_code}}
-          </div>
-          <div>
-            <b>ID {% if company.tin %} / PDV {%endif%}: </b>{{company.uin}} {%
-            if company.tin %} / {{company.tin}} {%endif%}
+        <!-- header finished -->
+        <section class="info-section">
+          <div class="info-content">
+            <div>
+              <b>Adresa: </b>{{company.address}}, {{company.city}},
+              {{company.postal_code}}
+            </div>
+            <div>
+              <b>ID {% if company.tin %} / PDV {%endif%}: </b>{{company.uin}} {%
+              if company.tin %} / {{company.tin}} {%endif%}
+            </div>
+
+            {% if company.iban %}
+            <div><b>IBAN: </b>{{company.iban}}</div>
+            {%endif%}
+            <!--  -->
+            {% if company.bank_name %}
+            <div><b>{{company.bank_name}}: </b>{{company.bank_account}}</div>
+            {%endif%}
+            <!--  -->
+            {% if company.bank2_name %}
+            <div><b>{{company.bank2_name}}: </b>{{company.bank2_account}}</div>
+            {%endif%}
+            <!--  -->
+            {% if company.bank3_name %}
+            <div><b>{{company.bank3_name}}: </b>{{company.bank3_account}}</div>
+            {%endif%}
+            <!--  -->
+            {% if company.iban %}
+            <div><b>IBAN: </b>{{company.iban}}</div>
+            {%endif%}
+            <!--  -->
+            {% if company.swift%}
+            <div><b>SWIFT: </b>{{company.swift}}</div>
+            {%endif%}
+            <!--  -->
+            <div><b>TEL: </b>{{company.contact}}</div>
+
+            {% if company.fax%}
+            <div><b>FAX: </b>{{company.fax}}</div>
+            {%endif%}
+
+            <div>
+              <b>E / W: </b>{{company.email|default_if_none:''}} /
+              {{company.website|default_if_none:''}}
+            </div>
           </div>
 
-          {% if company.iban %}
-          <div><b>IBAN: </b>{{company.iban}}</div>
-          {%endif%}
-          <!--  -->
-          {% if company.bank_name %}
-          <div><b>{{company.bank_name}}: </b>{{company.bank_account}}</div>
-          {%endif%}
-          <!--  -->
-          {% if company.bank2_name %}
-          <div><b>{{company.bank2_name}}: </b>{{company.bank2_account}}</div>
-          {%endif%}
-          <!--  -->
-          {% if company.bank3_name %}
-          <div><b>{{company.bank3_name}}: </b>{{company.bank3_account}}</div>
-          {%endif%}
-          <!--  -->
-          {% if company.iban %}
-          <div><b>IBAN: </b>{{company.iban}}</div>
-          {%endif%}
-          <!--  -->
-          {% if company.swift%}
-          <div><b>SWIFT: </b>{{company.swift}}</div>
-          {%endif%}
-          <!--  -->
-          <div><b>TEL: </b>{{company.contact}}</div>
-
-          {% if company.fax%}
-          <div><b>FAX: </b>{{company.fax}}</div>
-          {%endif%}
-
-          <div>
-            <b>E / W: </b>{{company.email|default_if_none:''}} /
-            {{company.website|default_if_none:''}}
+          <div class="info-content" style="width: 280px">
+            {% if invoice.partner %}
+            <div><b>Partner:</b> {{invoice.partner_name}}</div>
+            <div><b>Adresa:</b> {{invoice.partner_address}}</div>
+            <div><b>Grad:</b> {{invoice.partner_city}}</div>
+            <div>
+              <b>ID/PDV:</b>
+              {{invoice.partner_uin|default_if_none:''}}/{{invoice.partner_tin|default_if_none:''}}
+            </div>
+            {% endif %}
           </div>
-        </div>
+        </section>
+        <!-- Info section finished -->
+        <section class="table-section">
+          <table class="big-table">
+            <thead class="sticky">
+              <tr class="table-head">
+                <td width="3%">No</td>
+                <td>Sifra</td>
+                <td width="160px">Artikal</td>
+                <td width="8%">Jed. mjer.</td>
+                <td>Barkod</td>
+                <td>Kolicina</td>
+                <td>Cijena bez PDV-a</td>
+                <td width="6%">Popust</td>
+                <td>Iznos bez PDV</td>
+                <td>Iznos PDV</td>
+                <td>Ukupno sa PDV</td>
+              </tr>
+            </thead>
 
-        <div class="info-content" style="width: 280px">
-          {% if invoice.partner %}
-          <div><b>Partner:</b> {{invoice.partner_name}}</div>
-          <div><b>Adresa:</b> {{invoice.partner_address}}</div>
-          <div><b>Grad:</b> {{invoice.partner_city}}</div>
-          <div>
-            <b>ID/PDV:</b>
-            {{invoice.partner_uin|default_if_none:''}}/{{invoice.partner_tin|default_if_none:''}}
+            <tbody>
+              {% for ind in invoice.records %}
+              <tr class="table-body">
+                <td>{{forloop.counter}}</td>
+                <td>{{ind.article_code}}</td>
+                <td>
+                  {{ind.article_name}}<br />
+                  <i>{{ind.desc|default_if_none:''}}</i>
+                </td>
+                <td>{{ind.article_unit_id}}</td>
+                <td style="word-wrap: break-word; white-space: normal">
+                  {{ind.article.barcode}}
+                </td>
+                <td>{{ind.quantity}}</td>
+                <td>{{ind.price_without_vat}}</td>
+                <td>{{ind.discount}}</td>
+                <td>{{ind.total_without_vat}}</td>
+                <td>{{ind.vat_total}}</td>
+                <td>{{ind.total}}</td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+          <table class="big-table small">
+            <tbody style="float: right; margin: 10px">
+              <tr class="table-body" width="30%" class="table-footer">
+                <td colspan="10">OSNOVICA</td>
+                <td style="text-align: left">
+                  {{invoice.total_without_vat}} KM
+                </td>
+              </tr>
+              <tr class="table-body" class="table-footer">
+                <td colspan="10">PDV</td>
+                <td width="15%" style="text-align: left">
+                  {{invoice.vat_total}}
+                </td>
+              </tr>
+              <tr class="table-body total" class="table-footer">
+                <td colspan="10">Ukupno</td>
+                <td style="text-align: left; width: 70%">
+                  {{invoice.total}} KM
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <footer>
+          <div class="footer">
+            <div class="bottom-right-field">Izdao, M.P.</div>
+            <div class="bottom-center">
+              {% if invoice.footer %}
+              <b>NAPOMENA: </b> <br />
+              {{invoice.footer }} {%endif%}
+            </div>
+            <div class="bottom-right-field">Primio, M.P.</div>
+            <div id="signature">Signature</div>
           </div>
-          {% endif %}
-        </div>
+        </footer>
       </section>
-      <!-- Info section finished -->
-      <section class="table-section">
-        <table class="big-table">
-          <thead class="sticky">
-            <tr class="table-head">
-              <td width="3%">No</td>
-              <td>Sifra</td>
-              <td width="160px">Artikal</td>
-              <td width="8%">Jed. mjer.</td>
-              <td>Barkod</td>
-              <td>Kolicina</td>
-              <td>Cijena bez PDV-a</td>
-              <td width="6%">Popust</td>
-              <td>Iznos bez PDV</td>
-              <td>Iznos PDV</td>
-              <td>Ukupno sa PDV</td>
-            </tr>
-          </thead>
-
-          <tbody>
-            {% for ind in invoice.records %}
-            <tr class="table-body">
-              <td>{{forloop.counter}}</td>
-              <td>{{ind.article_code}}</td>
-              <td>
-                {{ind.article_name}}<br />
-                <i>{{ind.desc|default_if_none:''}}</i>
-              </td>
-              <td>{{ind.article_unit_id}}</td>
-              <td style="word-wrap: break-word; white-space: normal">
-                {{ind.article.barcode}}
-              </td>
-              <td>{{ind.quantity}}</td>
-              <td>{{ind.price_without_vat}}</td>
-              <td>{{ind.discount}}</td>
-              <td>{{ind.total_without_vat}}</td>
-              <td>{{ind.vat_total}}</td>
-              <td>{{ind.total}}</td>
-            </tr>
-            {%endfor%}
-          </tbody>
-        </table>
-        <table class="big-table small">
-          <tbody style="float: right; margin: 10px">
-            <tr class="table-body" width="30%" class="table-footer">
-              <td colspan="10">OSNOVICA</td>
-              <td style="text-align: left">{{invoice.total_without_vat}} KM</td>
-            </tr>
-            <tr class="table-body" class="table-footer">
-              <td colspan="10">PDV</td>
-              <td width="15%" style="text-align: left">
-                {{invoice.vat_total}}
-              </td>
-            </tr>
-            <tr class="table-body total" class="table-footer">
-              <td colspan="10">Ukupno</td>
-              <td style="text-align: left; width: 70%">{{invoice.total}} KM</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-      <footer>
-        <div class="footer">
-          <div class="bottom-right-field">Izdao, M.P.</div>
-          <div class="bottom-center">
-            {% if invoice.footer %}
-            <b>NAPOMENA: </b> <br />
-            {{invoice.footer }} {%endif%}
-          </div>
-          <div class="bottom-right-field">Primio, M.P.</div>
-          <div id="signature">Signature</div>
-        </div>
-      </footer>
     </main>
+    {% endfor %}
     <script>
       const pageHeight = document.querySelector(".wrapper").clientHeight;
 
