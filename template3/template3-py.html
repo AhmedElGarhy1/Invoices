@@ -241,6 +241,8 @@ header .header-left .shape::before {
       }
       .table-section .big-table.small {
         page-break-before: always;
+        display: block;
+        position: relative;
       }
 
       .table-section big-table thead {
@@ -252,6 +254,7 @@ header .header-left .shape::before {
         left: 0;
         position: relative;
         width: 100%;
+        background-color: white;
       }
       .footer {
         position: relative;
@@ -527,6 +530,9 @@ header .header-left .shape::before {
         `;
         }
       });
+
+      const footers = [...document.querySelectorAll("footer")];
+      footers[0].style.display = "block";
     </script>
   </body>
 </html>

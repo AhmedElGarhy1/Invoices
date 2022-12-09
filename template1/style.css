@@ -152,8 +152,9 @@ header .header-right .content .rows div {
 }
 .table-section .big-table.small {
   page-break-before: always;
+  display: block;
+  position: relative;
 }
-
 .table-section big-table thead {
   font-size: 15px;
 }
@@ -163,6 +164,7 @@ footer {
   left: 0;
   position: relative;
   width: 100%;
+  background-color: white;
 }
 .footer {
   position: relative;
@@ -215,5 +217,6 @@ footer {
   footer {
     position: fixed;
     z-index: -5;
+    display: none;
   }
 }
