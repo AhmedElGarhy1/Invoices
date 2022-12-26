@@ -17,7 +17,6 @@
       <header>
         <div class="header-left">
           <img class="logo" src="logo.png" alt="" />
-          <h2>COMPANY</h2>
         </div>
         <div class="header-right">
           <div class="content">
@@ -50,7 +49,7 @@
         </div>
       </header>
 
-      <div class="company-name">Company Name</div>
+      <div class="company-name">Company Name Name Name Name Name</div>
 
       <!-- header finished -->
 
@@ -217,22 +216,32 @@
       </footer>
     </main>
   </body>
-  <script>
-    const pageHeight = document.querySelector(".wrapper").clientHeight;
+ <script>
+      const wrappers = [...document.querySelectorAll(".wrapper")];
 
-    const paperHeight = 1123;
-    const footerHeight = 120;
-    window.addEventListener("beforeprint", (e) => {
-      const smallTable = document.querySelector(
+      const paperHeight = 1167;
+      const footersHeight = [...document.querySelectorAll("footer")].map(
+        (ele) => ele.clientHeight
+      );
+      const smallTable = document.querySelectorAll(
         ".table-section .big-table.small"
       );
-      if (pageHeight % paperHeight > footerHeight) {
-        smallTable.style.pageBreakBefore = "avoid";
-        smallTable.style.cssText = `
+      // handle footer issue
+
+      wrappers.forEach((wrapper, i) => {
+        const pagesNo = Math.ceil(wrapper.clientHeight / paperHeight);
+        const height = pagesNo * paperHeight;
+
+        if (wrapper.clientHeight % paperHeight > footersHeight[i]) {
+          smallTable[i].style.cssText = `
           page-break-before: avoid;
           z-index: 20000 !important;
         `;
-      }
-    });
-  </script>
+        }
+        wrapper.style.height = `${height}px`;
+      });
+
+      const footers = [...document.querySelectorAll("footer")];
+      footers[0].style.display = "block";
+    </script>
 </html>

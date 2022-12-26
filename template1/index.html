@@ -1503,7 +1503,9 @@
     const wrappers = [...document.querySelectorAll(".wrapper")];
 
     const paperHeight = 1167;
-    const footerHeight = 115;
+    const footersHeight = [...document.querySelectorAll("footer")].map(
+      (ele) => ele.clientHeight
+    );
     const smallTable = document.querySelectorAll(
       ".table-section .big-table.small"
     );
@@ -1513,7 +1515,7 @@
       const pagesNo = Math.ceil(wrapper.clientHeight / paperHeight);
       const height = pagesNo * paperHeight;
 
-      if (wrapper.clientHeight % paperHeight > footerHeight) {
+      if (wrapper.clientHeight % paperHeight > footersHeight[i]) {
         smallTable[i].style.cssText = `
           page-break-before: avoid;
           z-index: 20000 !important;

@@ -18,11 +18,12 @@ body {
   margin: auto;
   width: 800px !important;
   min-height: 100vh; /* testing */
-  background-color: white !important;
-  -webkit-print-color-adjust: exact;
   position: relative;
 }
-
+.wrapper-section {
+  background-color: white !important;
+  -webkit-print-color-adjust: exact;
+}
 /* header left */
 
 header {
@@ -224,6 +225,8 @@ header .header-right .shape::before {
 }
 .table-section .big-table.small {
   page-break-before: always;
+  display: block;
+  position: relative;
 }
 
 .table-section big-table thead {
@@ -235,6 +238,7 @@ footer {
   left: 0;
   position: relative;
   width: 100%;
+  background-color: white;
 }
 .footer {
   position: relative;
@@ -274,6 +278,7 @@ footer {
 
   footer {
     position: fixed;
-    z-index: -1000;
+    z-index: -5;
+    display: none;
   }
 }

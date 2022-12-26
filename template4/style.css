@@ -12,15 +12,18 @@
 
 body {
   background: #0e0e0e;
+  min-height: 100vh; /* testing */
 }
 
 .wrapper {
-  overflow-x: hidden;
   margin: auto;
   width: 800px !important;
+  min-height: 100vh; /* testing */
+  position: relative;
+}
+.wrapper-section {
   background-color: white !important;
   -webkit-print-color-adjust: exact;
-  position: relative;
 }
 
 /* header left */
@@ -129,8 +132,7 @@ header .rows div {
   padding: 6px 12px;
   position: absolute;
   top: 140px;
-  left: 110px;
-  transform: translateX(-50%);
+  left: 10px;
 }
 
 .scan-code img {
@@ -187,6 +189,8 @@ header .rows div {
 }
 .table-section .big-table.small {
   page-break-before: always;
+  display: block;
+  position: relative;
 }
 
 .table-section big-table thead {
@@ -198,6 +202,7 @@ footer {
   left: 0;
   position: relative;
   width: 100%;
+  background-color: white;
 }
 .footer {
   position: relative;
@@ -237,6 +242,6 @@ footer {
 
   footer {
     position: fixed;
-    z-index: -1000;
+    z-index: -5;
   }
 }
